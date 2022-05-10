@@ -1,0 +1,47 @@
+[
+    {
+        "model": "raterprojectapi.game",
+        "pk": 1,
+        "fields": {
+            "title": "Tic Tac Toe",
+            "description": "Three in a Row",
+            "number_of_players": 2,
+            "year_released": "0000",
+            "estimated_time_to_play": "1-2 minutes",
+            "age_recommendation": "3-99",
+            "maker": "Chickens?",
+            "organizer": 1,
+            "categories": [8, 4, 5]
+        }
+    },
+    {
+        "model": "raterprojectapi.game",
+        "pk": 2,
+        "fields": {
+            "title": "Risk",
+            "description": "A game of Skill",
+            "number_of_players": 4,
+            "year_released": "1964",
+            "estimated_time_to_play": "4+ hours",
+            "age_recommendation": "4-12",
+            "maker": "Hasbro",
+            "organizer": 1,
+            "categories": [1, 2, 3]
+        }
+    },
+    {
+        "model": "raterprojectapi.game",
+        "pk": 3,
+        "fields": {
+            "title": "Life",
+            "description": "3-D Live Action Role Play",
+            "number_of_players": 1,
+            "year_released": "Unknown",
+            "estimated_time_to_play": "> 80 years",
+            "age_recommendation": "N/A",
+            "maker": "Unknown",
+            "organizer": 1,
+            "categories": [6, 7, 9, 10]
+        }
+    }
+]
