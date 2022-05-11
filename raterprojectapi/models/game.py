@@ -20,3 +20,19 @@ class Game(models.Model):
     @editable.setter
     def editable(self, value):
         self.__editable = value 
+        
+    @property
+    def average_rating(self):
+        """Average rating calculated attribute for each game"""
+        ratings = self.ratings.all()
+
+        # Sum all of the ratings for the game
+        total_rating = 0
+        for rating in ratings:
+            total_rating += rating.rating
+        
+        # Calculate the averge and return it.
+        # If you don't know how to calculate averge, Google it.
+        average_rating = total_rating / ratings * 100
+        #return the result
+        return average_rating

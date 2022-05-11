@@ -4,6 +4,6 @@ from .game import Game
 
 class Rating(models.Model):
     
-    rating = models.CharField(max_length=50)
+    rating = models.IntegerField()
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="ratings")

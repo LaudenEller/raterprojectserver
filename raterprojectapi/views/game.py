@@ -83,4 +83,4 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         depth = 2 # INSQ: This will embed all the data the client is 
                             # looking for so that the relevant objects themselves are returned instead of just the FK ids
-        fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories', 'reviews', 'editable')
+        fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories', 'reviews', 'editable', 'ratings')
