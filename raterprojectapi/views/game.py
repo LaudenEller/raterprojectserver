@@ -1,5 +1,4 @@
 """View module for handling requests about games"""
-from email.policy import default
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -46,29 +45,16 @@ class GameView(ViewSet):
         Returns
             Response -- JSON serialized game instance
         """
-        player = Player.objects.get(user=request.auth.user)
-        # game_type_id = request.data.game_type
+        organizer = Player.objects.get(user=request.auth.user)
         serializer = CreateGameSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(player=player)
-        # serializer.save(game_type_id=game_type_id)
-        # game = Game.objects.create(
-        #     title=request.data["title"],
-        #     maker=request.data["maker"],
-        #     number_of_players=request.data["number_of_players"],
-        #     skill_level=request.data["skill_level"],
-        #     gamer=gamer,
-        #     game_type=game_type
-        # )
-        # serializer = GameSerializer(game)
+        serializer.save(organizer=organizer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 class CreateGameSerializer(serializers.ModelSerializer):
     """JSON serializer for games
     """
-    
-    event_count = serializers.IntegerField(default=None)
-    
+
     class Meta:
         model = Game
         fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker')
@@ -83,4 +69,4 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         depth = 2 # INSQ: This will embed all the data the client is 
                             # looking for so that the relevant objects themselves are returned instead of just the FK ids
-        fields = ('id', 'title', 'maker', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories')
+        fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories', 'reviews')

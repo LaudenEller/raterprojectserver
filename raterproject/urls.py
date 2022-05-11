@@ -19,8 +19,11 @@ from django.urls import path
 from raterprojectapi.views import register_user, login_user, GameView
 from rest_framework import routers
 
+from raterprojectapi.views.review import reviewView
+
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'games', GameView, 'game')
+router.register(r'reviews', reviewView, 'review')
 
 urlpatterns = [
     path('', include(router.urls)),
