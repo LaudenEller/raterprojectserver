@@ -32,6 +32,8 @@ class GameView(ViewSet):
         
         # games = Game.objects.annotate(event_count=Count('events'))
         games = Game.objects.all()
+        for game in games:
+            game.editable = request.auth.user == game.organizer.user
         # game_type = request.query_params.get('type', None)
         # if game_type is not None:
         #     games = games.filter(game_type_id=game_type)
@@ -51,6 +53,18 @@ class GameView(ViewSet):
         serializer.save(organizer=organizer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
+    def update(self, request, pk):
+        """Handle PUT requests for a game
+        
+        returns:
+            Response -- Empty body with 204 status code
+        """
+        game = Game.objects.get(pk=pk)
+        serializer = CreateGameSerializer(game, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+        
 class CreateGameSerializer(serializers.ModelSerializer):
     """JSON serializer for games
     """
@@ -69,4 +83,4 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         depth = 2 # INSQ: This will embed all the data the client is 
                             # looking for so that the relevant objects themselves are returned instead of just the FK ids
-        fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories', 'reviews')
+        fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories', 'reviews', 'editable')

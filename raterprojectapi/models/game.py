@@ -12,3 +12,11 @@ class Game(models.Model):
     maker = models.CharField(max_length=50)
     organizer = models.ForeignKey("Player", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", related_name="games")
+    
+    @property
+    def editable(self):
+        return self.__editable
+    
+    @editable.setter
+    def editable(self, value):
+        self.__editable = value 
