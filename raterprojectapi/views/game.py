@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from raterprojectapi.models import Game
 from raterprojectapi.models.player import Player
+from django.contrib.auth.models import User
 
 class GameView(ViewSet):
     """Level up game view"""
@@ -65,6 +66,8 @@ class GameView(ViewSet):
         serializer.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
         
+        
+
 class CreateGameSerializer(serializers.ModelSerializer):
     """JSON serializer for games
     """
@@ -83,4 +86,4 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         depth = 2 # INSQ: This will embed all the data the client is 
                             # looking for so that the relevant objects themselves are returned instead of just the FK ids
-        fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories', 'reviews', 'editable', 'ratings')
+        fields = ('id', 'title', 'description', 'year_released', 'number_of_players', 'estimated_time_to_play', 'age_recommendation', 'maker', 'organizer', 'categories', 'reviews', 'editable', 'average_rating')

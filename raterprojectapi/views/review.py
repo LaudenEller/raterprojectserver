@@ -6,7 +6,7 @@ from rest_framework import serializers, status
 from raterprojectapi.models.review import Review
 from raterprojectapi.models.player import Player
 
-class reviewView(ViewSet):
+class ReviewView(ViewSet):
     """Level up review view"""
     
     def retrieve(self, request, pk):
